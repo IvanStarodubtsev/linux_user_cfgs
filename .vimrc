@@ -1,5 +1,3 @@
-" Custom version of standard vimrc for Unix
-
 " An example for a vimrc file.
 "
 " Maintainer:	Bram Moolenaar <Bram@vim.org>
@@ -21,9 +19,6 @@ set encoding=utf-8
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
-
-"set clipboard=unnamedplus
-"vmap <C-c> "+y
 
 " Vundle config begins here
 filetype off                  " required
@@ -99,6 +94,9 @@ inoremap <C-U> <C-G>u<C-U>
 "  set mouse=a
 "endif
 
+map <C-U> <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
+map <C-D> <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
+
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
@@ -119,7 +117,7 @@ if has("autocmd")
   au!
 
   " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
+  autocmd FileType text setlocal textwidth=120
 
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
@@ -151,7 +149,6 @@ endif
 " - in second vim opened file paste yanked lines using next way: pressing key p will paste yanked text right where
 "   cursor is
 " - have fun and good luck!
-" NOW IT WORKS!
 vnoremap <C-c> "*y
 set clipboard=unnamedplus
 
@@ -193,16 +190,18 @@ set statusline+=\ line:\ %l\ of\ %L,\ col:\ %c\ (%p%%)
 if has ("autocmd")
   " for *.c files leave tabs as 8 chars set
   autocmd BufRead *.{c,cpp,py,js,log} set autoindent
-  autocmd BufRead *.{c,cpp,py,js,log} set noexpandtab
-  autocmd BufRead *.{c,cpp,py,js,log} set tabstop=4
-  autocmd BufRead *.{c,cpp,py,js,log} set shiftwidth=4
-  autocmd BufRead *.{c,cpp,py,js,log} set softtabstop=4
+  "autocmd bufread *.{c,cpp,py,js,log} set noexpandtab
+  autocmd BufRead *.{c,cpp,py,js,log} set tabstop=8
+  autocmd BufRead *.{c,cpp,py,js,log} set shiftwidth=8
+  autocmd BufRead *.{c,cpp,py,js,log} set softtabstop=8
+  autocmd bufread *.{c,cpp,py,js,log} set expandtab
   " for *.h files leave tabs as 8 chars set
   autocmd BufRead *.{h,hpp} set autoindent
-  autocmd BufRead *.{h,hpp} set noexpandtab
-  autocmd BufRead *.{h,hpp} set tabstop=4
-  autocmd BufRead *.{h,hpp} set shiftwidth=4
-  autocmd BufRead *.{h,hpp} set softtabstop=4
+  "autocmd BufRead *.{h,hpp} set noexpandtab
+  autocmd BufRead *.{h,hpp} set tabstop=8
+  autocmd BufRead *.{h,hpp} set shiftwidth=8
+  autocmd BufRead *.{h,hpp} set softtabstop=8
+  autocmd bufread *.{h,hpp} set expandtab
 endif
 
 " highlightning extra whitespaces trailing text in grey
@@ -220,11 +219,11 @@ endif
 " coloring text in red which rolls out of bound of line_width chars wide
 au BufWinEnter * let w:m2=matchadd ('ErrorMsg', '\%' . g:width . 'v.\+', -1)
 
-"if exists ('+textwidth')
-"	set textwidth=120
-"	set formatoptions+=t
-"	set wrap linebreak
-"endif
+if exists ('+textwidth')
+	set textwidth=120
+	set formatoptions+=t
+	set wrap linebreak
+endif
 
 " function for counting lines/chars/blocks selected
 function! VisualSelectionSize()
@@ -254,7 +253,6 @@ endfunction
 " hi def link cCustomFunc		Function
 " hi Function cterm=bold
 " in /usr/local/share/vim/vim74/syntax/c.vim
-" for ubuntu /usr/share/vim/vim74/syntax/c.vim
 
 " highlightning types
 autocmd BufRead, BufNewFile *.{c,h} len fname = expand ('<afile>:p:h') . '/types.vim'

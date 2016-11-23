@@ -21,7 +21,8 @@ set encoding=utf-8
 set nocompatible
 
 " Vundle config begins here
-filetype off                  " required
+
+"filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 "set rtp+=~/.vim/bundle/Vundle.vim
@@ -103,6 +104,8 @@ if &t_Co > 2 || has("gui_running")
   syntax on
   set hlsearch
 endif
+
+filetype plugin indent on
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
@@ -191,24 +194,36 @@ if has ("autocmd")
   " for *.c files leave tabs as 8 chars set
   autocmd BufRead *.{c,cpp,py,js,log} set autoindent
   "autocmd bufread *.{c,cpp,py,js,log} set noexpandtab
-  autocmd BufRead *.{c,cpp,py,js,log} set tabstop=8
+  ""autocmd BufRead *.{c,cpp,py,js,log} set tabstop=8
   autocmd BufRead *.{c,cpp,py,js,log} set shiftwidth=8
   autocmd BufRead *.{c,cpp,py,js,log} set softtabstop=8
-  autocmd bufread *.{c,cpp,py,js,log} set expandtab
+  autocmd BufRead *.{c,cpp,py,js,log} set expandtab
   " for *.h files leave tabs as 8 chars set
   autocmd BufRead *.{h,hpp} set autoindent
   "autocmd BufRead *.{h,hpp} set noexpandtab
-  autocmd BufRead *.{h,hpp} set tabstop=8
+  ""autocmd BufRead *.{h,hpp} set tabstop=8
   autocmd BufRead *.{h,hpp} set shiftwidth=8
   autocmd BufRead *.{h,hpp} set softtabstop=8
-  autocmd bufread *.{h,hpp} set expandtab
+  autocmd BufRead *.{h,hpp} set expandtab
+
+  " insert mode bindings for C/C++ langs
+  autocmd FileType c,cpp,h,hpp inoremap #d #define
+  autocmd FileType c,cpp,h,hpp inoremap #e #endif /*  */<Esc>hhi
+  autocmd FileType c,cpp,h,hpp inoremap #i #include ""<Esc>i
+  autocmd FileType c,cpp,h,hpp inoremap #< #include <><Esc>i
+  autocmd FileType c,cpp,h,hpp inoremap " ""<Left>
+  autocmd FileType c,cpp,h,hpp inoremap ' ''<Left>
+  autocmd FileType c,cpp,h,hpp inoremap ( ()<Left>
+  autocmd FileType c,cpp,h,hpp inoremap [ []<Left>
+  autocmd FileType c,cpp,h,hpp inoremap { {}<Left>
 endif
 
 " highlightning extra whitespaces trailing text in grey
 highlight ExtraWhitespace ctermbg=grey guibg=grey
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 
-set paste
+set copyindent
+"set pastetoggle=<F10>
 
 " setting vertical color column at position of line_width chars
 if exists ('+colorcolumn')

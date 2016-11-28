@@ -90,6 +90,8 @@ map Q gq
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
 
+"set term=screen-256color
+
 " In many terminal emulators the mouse works just fine, thus enable it.
 "if has('mouse')
 "  set mouse=a
@@ -209,13 +211,17 @@ if has ("autocmd")
   " insert mode bindings for C/C++ langs
   autocmd FileType c,cpp,h,hpp inoremap #d #define
   autocmd FileType c,cpp,h,hpp inoremap #e #endif /*  */<Esc>hhi
-  autocmd FileType c,cpp,h,hpp inoremap #i #include ""<Esc>i
+  autocmd FileType c,cpp,h,hpp inoremap #" #include ""<Esc>i
   autocmd FileType c,cpp,h,hpp inoremap #< #include <><Esc>i
   autocmd FileType c,cpp,h,hpp inoremap " ""<Left>
   autocmd FileType c,cpp,h,hpp inoremap ' ''<Left>
   autocmd FileType c,cpp,h,hpp inoremap ( ()<Left>
   autocmd FileType c,cpp,h,hpp inoremap [ []<Left>
-  autocmd FileType c,cpp,h,hpp inoremap { {}<Left>
+  "autocmd FileType c,cpp,h,hpp inoremap { {}<Left>
+
+  "autocmd FileType c,cpp,h,hpp inoremap #e #endif<Esc>%y<End>''A / <Esc>pA /<Esc>
+  autocmd FileType c,cpp,h,hpp inoremap { {<Return>}<Up><Return>
+
 endif
 
 " highlightning extra whitespaces trailing text in grey

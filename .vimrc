@@ -217,6 +217,8 @@ if has ("autocmd")
   autocmd FileType c,cpp,h,hpp inoremap ' ''<Left>
   autocmd FileType c,cpp,h,hpp inoremap ( ()<Left>
   autocmd FileType c,cpp,h,hpp inoremap [ []<Left>
+  autocmd FileType c,cpp,h,hpp inoremap < <><Left>
+
   "autocmd FileType c,cpp,h,hpp inoremap { {}<Left>
 
   "autocmd FileType c,cpp,h,hpp inoremap #e #endif<Esc>%y<End>''A / <Esc>pA /<Esc>
